@@ -13,7 +13,7 @@
 
         <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
         </style>
     </head>
@@ -23,7 +23,7 @@
 <div class="col-md-12">
 
   <input type="hidden" name="_method" value="PUT"> 
-  <form class="form-horizontal" id="form-edit-client" method="POST" action="{{url('edit-product')}}">
+  <form class="form-horizontal" id="form-edit-product" method="POST" action="{{url('edit-product')}}">
   @csrf
     <input type="hidden" value="{{$product_data->id}}" name="id" >
    <fieldset>
@@ -38,6 +38,7 @@
      <label class="col-md-4 control-label" for="client-name">Product Name</label>  
      <div class="col-md-4">
      <input value="{{old('name', $product_data->name)}}" id="product-name" name="name" type="text" placeholder="Enter product name" class="form-control input-md"> 
+     <span style="color:red;">@error('name'){{$message}}@enderror</span>
      </div>
    </div>
    
@@ -46,6 +47,7 @@
      <label class="col-md-4 control-label" for="client-name">Product Price</label>  
      <div class="col-md-4">
      <input value="{{old('price', $product_data->price)}}" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)' id="product-price" name="price" type="text" placeholder="Enter product price" class="form-control input-md"> 
+     <span style="color:red;">@error('price'){{$message}}@enderror</span>
      </div>
    </div>
 
@@ -57,12 +59,35 @@
      <textarea class="form-control" id="product-description" name="description" rows="4" cols="50" placeholder="Enter product description">{{old('description', $product_data->description)}}</textarea> 
      </div>
    </div>
-   
+
+     
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4  class="modal-title">Confirm Edit</h4>
+            <button  type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to submit the data?</p>
+          </div>
+          <div class="modal-footer">
+            <button onclick="submitForm()" type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
    <!-- Button -->
    <div class="form-group">
      <label class="col-md-4 control-label" for="btn-save"></label>
      <div class="col-md-4">
-       <button id="btn-save" name="btn-save" class="btn btn-success">Submit</button>
+       <button type="button" data-toggle="modal" data-target="#myModal" id="btn-save" name="btn-save" class="btn btn-success">Submit</button>
      </div>
    </div>
    
@@ -75,6 +100,9 @@
     </div>
     </div>
     <script>
+      function submitForm() {
+        $("#form-edit-product").submit();
+      }
     </script>
     </body>
 </html>

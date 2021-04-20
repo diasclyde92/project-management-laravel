@@ -13,23 +13,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/list-products', function () {
-    return view('list_products');
-});
-
-Route::get('/add-product', function () {
-    return view('add_product');
-});
-
-Route::get('/edit-product', function () {
-    return view('edit_product');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Auth::routes();
+
+Route::view('/add-product', 'add_product' );
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -38,3 +26,5 @@ Route::post('/add-product', [App\Http\Controllers\ProductController::class, 'add
 Route::get('/fetch-product/{id}', [App\Http\Controllers\ProductController::class, 'fetchProduct']);
 
 Route::post('/edit-product', [App\Http\Controllers\ProductController::class, 'editProduct']);
+
+Route::post('/delete-product', [App\Http\Controllers\ProductController::class, 'deleteProduct']);

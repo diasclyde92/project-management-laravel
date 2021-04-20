@@ -157,15 +157,15 @@ html {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <a style="margin-top:5px;" href="/home"><button type="button" class="btn btn-outline-secondary">Dashboard</button>  </a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" style="float:right;">
                         <!-- Authentication Links -->
                                                     <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre="" >
-                                    clyde
+                                <a id="navbarDropdown" style="font-size: 15px;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre="" >
+                                {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -175,7 +175,8 @@ html {
                                     </a>
 
                                     <form id="logout-form" action="http://localhost:8000/logout" method="POST" class="d-none">
-                                        <input type="hidden" name="_token" value="w0WJeWiUVYkWtai8nChAAFs7sDw5mV6ceuyvolT0">                                    </form>
+                                        @csrf                                   
+                                    </form>
                                 </div>
                             </li>
                                             </ul>
